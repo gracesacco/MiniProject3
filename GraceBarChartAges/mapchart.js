@@ -21,6 +21,8 @@ Promise.all([ // load multiple files
                 for(let j =0; j<filteredData.length; j++){
                     if(filteredData[j].Country === features[i].properties.name){
                         features[i].properties.DeathRate = filteredData[j].DeathRate;
+                        features[i].properties.Deaths = filteredData[j].Deaths;
+
                     }
                 }
             }
@@ -43,7 +45,22 @@ Promise.all([ // load multiple files
                 .join('path')
                 .attr('d', path)
                 .attr('fill', d=> color(d.properties.DeathRate))
-                .on("click", d=> console.log(d));
+                .on("click", (event,d )=> {
+                  const pos = d3.pointer(event, window);
+
+                  d3.select("#tooltip")
+                  .style("left", pos[0] + "px")
+                  .style("top", pos[1] + "px")
+                  .select("#value")
+                  .html(
+                    "Country: " + d.properties.name + "<br>" +
+                    "Deaths: " + d.properties.Deaths + "<br>" +
+                    "Death Rate : " + d.properties.DeathRate + " (per 100,000)"
+                  )
+                  d3.select("#tooltip").classed("hidden", false);
+
+                });
+
     
             svg.append('path')
                 .datum(topojson.mesh(map, map.objects.countries))

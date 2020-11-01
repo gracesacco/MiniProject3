@@ -18,7 +18,9 @@
     <script src="https://d3js.org/d3.v6.js" defer></script>
     <script src="https://unpkg.com/topojson@3" defer></script>
     <script src="mapchart.js" defer></script>
-    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <script src="main.js" defer></script> -->
 
     <!-- import the webpage's javascript file -->
   
@@ -39,7 +41,7 @@
       </div>
       <div class="row">
         <div class="col1">
-          
+
         </div>
         <div class="col1">
 s
@@ -49,5 +51,8 @@ s
         </div>
 
       </div>
+      <div id="tooltip" class="hidden">
+        <p><span id="value"></span></p>
+    </div>
   </body>
   </html>
