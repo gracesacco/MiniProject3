@@ -1,10 +1,10 @@
 export default
-function Plot(data, country) {
+function Plot(container) {
 	// initialization
-    const margin = {top:30, left:50, bottom:65, right:30};
+    const margin = {top:30, left:75, bottom:80, right:30};
     const width = 700- margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
-    
+
     const svg = d3.select(container)
     .append("svg")
     .attr("width", width+margin.left+margin.right)
@@ -12,59 +12,153 @@ function Plot(data, country) {
     .append("g")
     .attr("transform",`translate(${margin.left}, ${margin.top})`);
 
-   
-    const xScale = d3.scalePoint()  
-     .range([0, width]);    
-  
-    const yScale = d3.scaleLinear()       
-      .range([height, 0]);
+    const padding = 5;
 
- 
-    const color=d3.scaleOrdinal()
-        .range(d3.schemeTableau10);
 
-    svg.append("g")
-      .attr("class", "y-axis");
-
-    svg.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0, ${height})`);
-    
-    
-   
-	function update(_data){
+	function update(_data,_country,_year){
         const data=_data;
-        
+        const country=_country;
+        const year=_year;
+
         const avals= _.uniq(_.pluck(data, 'Age')).filter(a=>a!="All ages");
         const yvals= _.uniq(_.pluck(data, 'Year')).sort((a,b)=>a-b);
-        
-        console.log("ages",avals);
-        console.log("years",yvals);
 
-        const ab= data.filter((a,i)=>a.Sex=="Both" && a.Age!="All ages");
+        const ab= data.filter((a)=>a.Sex=="Both" && a.Age!="All ages" && a.Country==country );
 
-        console.log("data",ab);
 
-        
+        console.log("Plot data",ab);
+
+        const xScale = d3.scalePoint()
+        .range([padding, width-padding]);    
+
+        const yScale = d3.scaleLinear()
+        .range([height-padding, padding]);
+
+
+        const color=d3.scaleOrdinal()
+            .range(d3.schemeTableau10);
+
+
+        svg.append("g")
+        .attr("class", "y-axis");
+
+        svg.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", `translate(0, ${height})`);
+
+
         yScale.domain([0, d3.max(ab,d=>d.DeathRate)]);
         xScale.domain(avals);
         color.domain(yvals);
 
-    
-          
-        const legend= svg.selectAll('circle')
+        const xAxis = d3.axisBottom()
+        .scale(xScale);
+
+        const yAxis = d3.axisLeft()
+        .scale(yScale);
+
+
+
+
+    svg.select(".x-axis")
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)" );
+
+    svg.select(".y-axis")
+        .call(yAxis);
+
+
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left+20 )
+        .attr("x",0 - (height / 2))
+        .style("text-anchor", "middle")
+        .attr("font-size",13)
+        .text("Death rate per 100,000");
+
+    svg.append("text")
+        .attr("y", height + margin.bottom-5)
+        .attr("x", width/2)
+        .attr("font-size",10)
+        .style("text-anchor", "middle")
+        .attr("font-size",13)
+        .text("Ages");
+
+
+     svg.selectAll('circle')
             .data(ab)
             .enter()
             .append('circle')
-            .attr("class","age")
+            .attr("class", (d)=> {
+                if(d.Year==1970)
+                {
+                    return "age1970";
+                }
+                if(d.Year==1980)
+                {
+                    return "age1980";
+                }
+                if(d.Year==1990){
+                    return " age1990";
+                }
+                if(d.Year == 2010){
+                    return "age2010";
+                }
+                if(d.Year==2000){
+                    return "age2000";
+                }
+
+            })
             .attr("cx", d=> xScale(d.Age))
             .attr("cy", d=> yScale(d.DeathRate))
-            .attr("r", 3)
+            .attr("r", 2.5)
             .attr("fill",d=>{
                 return color(d.Year);
+            })
+            .attr("opacity", .8)
+            .on("mouseover", (event,d )=> {
+                const pos = d3.pointer(event, window);
+                d3.select("#agetooltip")
+                .style("left", pos[0] + "px")
+                .style("top", pos[1] + "px")
+                .select("#age")
+                .html(
+                  "Year : " + d.Year + "<br>" +
+                  "Death Rate : " + d.DeathRate + " (per 100,000)"
+                )
+                d3.select("#agetooltip").classed("hidden", false);
+              })
+            .on("mouseleave", (event,d)=>{
+                d3.select("#agetooltip").classed("hidden", true);
             });
 
-        
+
+
+
+            if(year==1970){
+                svg.selectAll(".age1970").attr("fill-opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black");
+            }
+            if(year==1980){
+                svg.selectAll(".age1980").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black");
+            }
+            if(year==1990){
+                svg.selectAll(".age1990").attr("fill-opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black");
+            }
+            if(year==2000){
+                svg.selectAll(".age2000").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black");
+            }
+            if(year==2010){
+
+                svg.selectAll(".age2010").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black");
+            }
+
+
+
+
         svg.selectAll('.legend')
             .data(yvals)
             .enter()
@@ -73,7 +167,7 @@ function Plot(data, country) {
             .attr('cy', function(d,i){ return 100 + i*25} )
             .attr('r',8)
             .attr('fill', d=> color(d));
-       
+
         svg.selectAll(".label")
             .data(yvals)
             .enter()
@@ -84,27 +178,10 @@ function Plot(data, country) {
             .text(function(d){ return d})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle");
-        
-            
-       
 
-        const xAxis = d3.axisBottom()
-            .scale(xScale);
-        
-        const yAxis = d3.axisLeft()
-            .scale(yScale);
 
-            svg.select(".x-axis")
-            .call(xAxis)
-            .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-65)" );
-        
-            svg.select(".y-axis")
-            .call(yAxis);
-            
+
+
     }
     return {
         update
