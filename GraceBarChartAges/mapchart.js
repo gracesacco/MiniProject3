@@ -3,9 +3,9 @@ import genderChart from './genderchart.js';
 import countryName from './countryName.js';
 import Plot from './Plot.js';
 
-Promise.all([ // load multiple files
+Promise.all([
         d3.json('world-110m.json'),d3.csv('IHME_GBD_2010_MORTALITY_AGE_SPECIFIC_BY_COUNTRY_1970_2010-2.csv',d3.autoType)])
-        .then((data) => { // or use destructuring :([airports, wordmap])=>{ ...
+        .then((data) => { 
         let map = data[0]
         let countries = data[1];
         const features = topojson.feature(map, map.objects.countries).features;
@@ -17,7 +17,7 @@ Promise.all([ // load multiple files
             d3.select("svg").remove();
             d3.select('#svgGender').remove();
             d3.select('#chartAges').remove();
-            d3.select('#agec').remove();
+            d3.select('#svgAge').remove();
             const countryDIV = document.getElementById("country");
             if (countryDIV.style.display !== "none") {
               countryDIV.style.display = "none";
@@ -72,10 +72,9 @@ Promise.all([ // load multiple files
                 .attr('d', path)
                 .attr('fill', d=> hasDeathRate(d))
                 .on("mouseenter", (event, d) => {
+
                   const pos = d3.pointer(event, window);
-                  // if (d.properties.name === null){
-                  //   console.log('d')
-                  // }
+
                   d3.select("#tooltip")
                   .style("left", pos[0] + "px")
                   .style("top", pos[1] + "px")
@@ -99,7 +98,7 @@ Promise.all([ // load multiple files
                   countryName(d.properties.name)
                   BarChartAges(data, d.properties.name)
                   genderChart(data, d.properties.name, year)
-                  Plot("#age-chart",data, d.properties.name, year)
+                  Plot(data, d.properties.name, year)
                 });
 
             svg.append('path')

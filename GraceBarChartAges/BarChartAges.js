@@ -54,7 +54,6 @@ function filterData(data, country) {
       newResults.push(e);
     };
   })
-  console.log(newResults);
   renderBarChart(newResults);
 }
 

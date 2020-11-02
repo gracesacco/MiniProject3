@@ -1,22 +1,25 @@
 export default
-function Plot(container,_data,_country,_year) {
+function Plot(_data,_country,_year) {
 	// initialization
-    const margin = {top:30, left:75, bottom:80, right:30};
+    const margin = {top: 20, right: 20, bottom: 70, left: 75};
     const width = 500 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
-    const svg = d3.select(container)
+    d3.select('#svgAge').remove();
+
+    const svg = d3.select("#age-chart")
     .append("svg")
+    .attr("id","svgAge")
     .attr("width", width+margin.left+margin.right)
     .attr("height", height+margin.top+margin.bottom)
     .append("g")
     .attr("transform",`translate(${margin.left}, ${margin.top})`);
 
-    const padding = 5;
+    const padding = 0;
 
 
 
-        const data=_data;
+        const data=_data[1];
         const country=_country;
         const year=_year;
 
@@ -124,7 +127,7 @@ function Plot(container,_data,_country,_year) {
             if(year==1970){
                 svg.selectAll(".age1970").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black").attr("fill", d=> color(d.Year)).on("mouseover", (event,d )=> {
                     const pos = d3.pointer(event, window);
-                    d3.select("#agetooltip")
+                    d3.select("#tooltipAGES")
                     .style("left", pos[0] + "px")
                     .style("top", pos[1] + "px")
                     .select("#age")
@@ -132,16 +135,16 @@ function Plot(container,_data,_country,_year) {
                       "Year : " + d.Year + "<br>" +
                       "Death Rate : " + d.DeathRate + " (per 100,000)"
                     )
-                    d3.select("#agetooltip").classed("hidden", false);
+                    d3.select("#tooltipAGES").classed("hidden", false);
                   })
                 .on("mouseleave", (event,d)=>{
-                    d3.select("#agetooltip").classed("hidden", true);
+                    d3.select("#tooltipAGES").classed("hidden", true);
                 });
             }
             if(year==1980){
                 svg.selectAll(".age1980").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black").attr("fill", d=> color(d.Year)).on("mouseover", (event,d )=> {
                     const pos = d3.pointer(event, window);
-                    d3.select("#agetooltip")
+                    d3.select("#tooltipAGES")
                     .style("left", pos[0] + "px")
                     .style("top", pos[1] + "px")
                     .select("#age")
@@ -149,16 +152,16 @@ function Plot(container,_data,_country,_year) {
                       "Year : " + d.Year + "<br>" +
                       "Death Rate : " + d.DeathRate + " (per 100,000)"
                     )
-                    d3.select("#agetooltip").classed("hidden", false);
+                    d3.select("#tooltipAGES").classed("hidden", false);
                   })
                 .on("mouseleave", (event,d)=>{
-                    d3.select("#agetooltip").classed("hidden", true);
+                    d3.select("#tooltipAGES").classed("hidden", true);
                 });
             }
             if(year==1990){
                 svg.selectAll(".age1990").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black").attr("fill", d=> color(d.Year)).on("mouseover", (event,d )=> {
                     const pos = d3.pointer(event, window);
-                    d3.select("#agetooltip")
+                    d3.select("#tooltipAGES")
                     .style("left", pos[0] + "px")
                     .style("top", pos[1] + "px")
                     .select("#age")
@@ -166,16 +169,16 @@ function Plot(container,_data,_country,_year) {
                       "Year : " + d.Year + "<br>" +
                       "Death Rate : " + d.DeathRate + " (per 100,000)"
                     )
-                    d3.select("#agetooltip").classed("hidden", false);
+                    d3.select("#tooltipAGES").classed("hidden", false);
                   })
                 .on("mouseleave", (event,d)=>{
-                    d3.select("#agetooltip").classed("hidden", true);
+                    d3.select("#tooltipAGES").classed("hidden", true);
                 });
             }
             if(year==2000){
                 svg.selectAll(".age2000").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black").attr("fill", d=> color(d.Year)).on("mouseover", (event,d )=> {
                     const pos = d3.pointer(event, window);
-                    d3.select("#agetooltip")
+                    d3.select("#tooltipAGES")
                     .style("left", pos[0] + "px")
                     .style("top", pos[1] + "px")
                     .select("#age")
@@ -183,17 +186,17 @@ function Plot(container,_data,_country,_year) {
                       "Year : " + d.Year + "<br>" +
                       "Death Rate : " + d.DeathRate + " (per 100,000)"
                     )
-                    d3.select("#agetooltip").classed("hidden", false);
+                    d3.select("#tooltipAGES").classed("hidden", false);
                   })
                 .on("mouseleave", (event,d)=>{
-                    d3.select("#agetooltip").classed("hidden", true);
+                    d3.select("#tooltipAGES").classed("hidden", true);
                 });
             }
             if(year==2010){
 
                 svg.selectAll(".age2010").attr("opacity", 1).attr("r",4).attr("stroke-opacity", 1).attr("stroke","black").attr("fill", d=> color(d.Year)).on("mouseover", (event,d )=> {
                     const pos = d3.pointer(event, window);
-                    d3.select("#agetooltip")
+                    d3.select("#tooltipAGES")
                     .style("left", pos[0] + "px")
                     .style("top", pos[1] + "px")
                     .select("#age")
@@ -201,10 +204,10 @@ function Plot(container,_data,_country,_year) {
                       "Year : " + d.Year + "<br>" +
                       "Death Rate : " + d.DeathRate + " (per 100,000)"
                     )
-                    d3.select("#agetooltip").classed("hidden", false);
+                    d3.select("#tooltipAGES").classed("hidden", false);
                   })
                 .on("mouseleave", (event,d)=>{
-                    d3.select("#agetooltip").classed("hidden", true);
+                    d3.select("#tooltipAGES").classed("hidden", true);
                 });
             }
 
@@ -214,17 +217,17 @@ function Plot(container,_data,_country,_year) {
             .data(yvals)
             .enter()
             .append('circle')
-            .attr('cx', 300 )
-            .attr('cy', function(d,i){ return i*25} )
-            .attr('r',5)
+            .attr('cx', width-120 )
+            .attr('cy', function(d,i){ return i*25-2} )
+            .attr('r',8)
             .attr('fill', d=> color(d));
 
         svg.selectAll(".label")
             .data(yvals)
             .enter()
             .append('text')
-            .attr("x", 315)
-            .attr("y", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("x", width-100)
+            .attr("y", function(d,i){ return i*25}) 
             .style("fill", function(d){ return color(d)})
             .text(function(d){ return d})
             .attr("text-anchor", "left")
