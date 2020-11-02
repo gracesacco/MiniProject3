@@ -17,6 +17,7 @@ Promise.all([ // load multiple files
             d3.select("svg").remove();
             d3.select('#svgGender').remove();
             d3.select('#chartAges').remove();
+            d3.select('#agec').remove();
             const countryDIV = document.getElementById("country");
             if (countryDIV.style.display !== "none") {
               countryDIV.style.display = "none";

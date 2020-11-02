@@ -29,7 +29,7 @@ function Plot(container, _data,_country,_year) {
         const ab= data.filter((a)=>a.Sex=="Both" && a.Age!="All ages" && a.Country==country );
 
 
-        console.log("Plot data",ab);
+        // console.log("Plot data",ab);
 
         const xScale = d3.scalePoint()
         .range([padding, width-padding]);

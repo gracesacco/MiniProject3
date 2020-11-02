@@ -64,17 +64,36 @@ export default function genderBarChart(countrydata, country, year) {
 
     bars.enter()
         .append('rect')
+        .attr("class", "bar1") 
         .merge(bars)
-        // .transition()
-        // .duration(1000) 
+        .transition()
+        .duration(1000) 
         .attr('x', d => xScale(d.Sex)+margin.left+60)
         .attr('y', d => yScale(d.DeathRate)+margin.top)
         .attr('width', 50)
         .attr('height', d=> height - yScale(d.DeathRate))
-        .attr('fill', 'lightblue')
-        .attr('stroke', 'black')
         .attr('opacity', 0.8)
-        .attr('class', 'income')
+        // .on("mouseover", function(event, d) {
+        //     console.log("hi");
+        //     const pos = d3.pointer(event, window);
+
+        //     // let xPosition = margin.left + width / 2 + parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
+        //     // let yPosition = margin.top + parseFloat(d3.select(this).attr("y")) / 2 + height;
+      
+        //     d3.select("#tooltipGender")
+        //         .style("left", pos[0] + "px")
+        //         .style("top", pos[1] + "px")
+        //       .select("#value")
+        //       .html(
+        //         "Country: " + d.properties.name + "<br>" +
+        //         "Deaths: " + d.properties.Deaths + "<br>" +
+        //         "Death Rate : " + d.properties.DeathRate + " (per 100,000)"
+        //       )      
+        //     d3.select("#tooltipGender").classed("hidden", false);
+        //   })
+        //   .on("mouseout", function(d) {
+        //     d3.select("#tooltipGender").classed("hidden", true);
+        //   });
 
     bars.exit().remove();
 

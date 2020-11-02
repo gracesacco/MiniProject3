@@ -1,36 +1,36 @@
 export default function BarChartAges(countryData, country){
-const data = countryData[1];
-let margin = {top: 20, right: 20, bottom: 70, left: 75},
-  width = 500 - margin.left - margin.right,
-  height = 300 - margin.top - margin.bottom;
-d3.select('#chartAges').remove(); 
-let svg = d3
-  .select("#chart-area")
-  .append("svg")
-  .attr("id", "chartAges")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  const data = countryData[1];
+  let margin = {top: 20, right: 20, bottom: 70, left: 75},
+    width = 500 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+  d3.select('#chartAges').remove(); 
+  let svg = d3
+    .select("#chart-area")
+    .append("svg")
+    .attr("id", "chartAges")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-let x = d3
-  .scaleBand()
-  .range([0, width])
-  .padding(0.1);
+  let x = d3
+    .scaleBand()
+    .range([0, width])
+    .padding(0.1);
 
-let y = d3.scaleLinear().range([height, 0]);
+  let y = d3.scaleLinear().range([height, 0]);
 
-let xAxis = d3
-  .axisBottom()
-  .ticks(5)
-  .scale(x)
+  let xAxis = d3
+    .axisBottom()
+    .ticks(5)
+    .scale(x)
 
-let yAxis = d3.axisLeft().scale(y);
+  let yAxis = d3.axisLeft().scale(y);
 
-let xAxisGroup = svg.append("g").attr("class", "x-axis axis");
+  let xAxisGroup = svg.append("g").attr("class", "x-axis axis");
 
-let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
+  let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
 
 
 filterData(data, country);
@@ -71,7 +71,7 @@ function renderBarChart(data) {
 
   bars.enter()
     .append("rect")
-    .attr("class", "bar")
+    .attr("class", "bar") 
     .attr("x", function(d) { 
       return x(d.Year);
     })
@@ -111,6 +111,8 @@ function renderBarChart(data) {
     .attr("transform",
           "translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
     .style("text-anchor", "middle")
+    .transition()
+    .duration(1000) 
     .text("Year");
 
 // text label for the y axis
@@ -122,7 +124,5 @@ function renderBarChart(data) {
     .style("text-anchor", "middle")
     .text("Number of Total Deaths");   
       
-  svg.select("x-axis axis").remove();
-  svg.select("y-axis axis").remove();
 }
 }
