@@ -17,7 +17,11 @@ Promise.all([ // load multiple files
             d3.select('#svgGender').remove();
             d3.select('#chartAges').remove();
             const countryDIV = document.getElementById("country");
-            countryDIV.remove();
+            if (countryDIV.style.display === "none") {
+              countryDIV.style.display = "block";
+            } else {
+              countryDIV.style.display = "none";
+            }
             filterData(year);
             }
 
@@ -88,6 +92,10 @@ Promise.all([ // load multiple files
       
                 })
                 .on("click", (event,d )=> {
+                  const countryDIV = document.getElementById("country");
+                  if (countryDIV.style.display === "none") {
+                    countryDIV.style.display = "block";
+                  } 
                   countryName(d.properties.name)
                   BarChartAges(data, d.properties.name)
                   genderChart(data, d.properties.name, year)

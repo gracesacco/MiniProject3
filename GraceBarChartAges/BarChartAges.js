@@ -1,7 +1,5 @@
 export default function BarChartAges(countryData, country){
 const data = countryData[1];
-console.log(country)
-console.log(data)
 let margin = {top: 20, right: 20, bottom: 70, left: 75},
   width = 500 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
