@@ -1,38 +1,14 @@
 export default function BarChartAges(data, country){
-  console.log(country)
-  console.log(data)
-  filterData(country);
-
-  function filterData(country) {
-    let newResults = [];
-    let finalResults = data.filter(function(e){
-     if (e.Country == country && e.Year == 1970 && e.Age == "All ages" && e.Sex == "Both") {
-        newResults.push(e);
-      };
-    if (e.Country == country && e.Year == 1980 && e.Age == "All ages" && e.Sex == "Both") {
-        newResults.push(e);
-      };
-    if (e.Country == country && e.Year == 1990 && e.Age == "All ages" && e.Sex == "Both") {
-        newResults.push(e);
-      };
-    if (e.Country == country && e.Year == 2000 && e.Age == "All ages" && e.Sex == "Both") {
-        newResults.push(e);
-      };
-    if (e.Country == country && e.Year == 2010 && e.Age == "All ages" && e.Sex == "Both") {
-        newResults.push(e);
-      };
-    })
-    console.log(newResults);
-    renderBarChart(newResults);
-  }
-function renderBarChart(data) {
-let margin = {top: 20, right: 20, bottom: 70, left: 70},
+console.log(country)
+console.log(data)
+let margin = {top: 20, right: 20, bottom: 70, left: 75},
   width = 600 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
-
+d3.select('#chartAges').remove(); 
 let svg = d3
   .select("#chart-area")
   .append("svg")
+  .attr("id", "chartAges")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -57,17 +33,44 @@ let xAxisGroup = svg.append("g").attr("class", "x-axis axis");
 
 let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
 
+
+filterData(data, country);
+
+function filterData(data, country) {
+  let newResults = [];
+  let finalResults = data.filter(function(e){
+   if (e.Country == country && e.Year == 1970 && e.Age == "All ages" && e.Sex == "Both") {
+      newResults.push(e);
+    };
+  if (e.Country == country && e.Year == 1980 && e.Age == "All ages" && e.Sex == "Both") {
+      newResults.push(e);
+    };
+  if (e.Country == country && e.Year == 1990 && e.Age == "All ages" && e.Sex == "Both") {
+      newResults.push(e);
+    };
+  if (e.Country == country && e.Year == 2000 && e.Age == "All ages" && e.Sex == "Both") {
+      newResults.push(e);
+    };
+  if (e.Country == country && e.Year == 2010 && e.Age == "All ages" && e.Sex == "Both") {
+      newResults.push(e);
+    };
+  })
+  console.log(newResults);
+  renderBarChart(newResults);
+}
+
+function renderBarChart(data) {
   data.Deaths= +data.Deaths;
   x.domain( data.map(function(d) { return d.Year; }))
   y.domain([ 0, d3.max(data, function(d) { return d.Deaths;  })]);
   let bars = svg
     .selectAll(".bar")
+    .attr("class", "bar")
     .remove()
     .exit()
     .data(data);
 
-  bars
-    .enter()
+  bars.enter()
     .append("rect")
     .attr("class", "bar")
     .attr("x", function(d) { 
@@ -85,16 +88,16 @@ let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
       let xPosition = margin.left + width / 2 + parseFloat(d3.select(this).attr("x")) + x.bandwidth() / 2;
       let yPosition = margin.top + parseFloat(d3.select(this).attr("y")) / 2 + height;
 
-      d3.select("#tooltip")
-        .style("left", xPosition + "px")
-        .style("top", yPosition + "px")
+      d3.select("#tooltipAGES")
+        .style("left", xPosition + -175 + "px")
+        .style("top", yPosition + 500 + "px")
         .select("#value")
-        .text("Number of Total Deaths: " + " " +  d.Deaths);
+        .text("Number of Total Deaths: " + " " +  d.Deaths + " in " + d.Year);
 
-      d3.select("#tooltip").classed("hidden", false);
+      d3.select("#tooltipAGES").classed("hidden", false);
     })
     .on("mouseout", function(d) {
-      d3.select("#tooltip").classed("hidden", true);
+      d3.select("#tooltipAGES").classed("hidden", true);
     });
 
   // ---- DRAW AXIS	----
@@ -104,14 +107,6 @@ let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
     .call(xAxis);
 
   yAxisGroup = svg.select(".y-axis").call(yAxis);
-
-  svg
-    .append("text")
-    .attr("class", "axis-title")
-    .attr("x", 200)
-    .attr("y", -10)
-    .attr("dy", ".1em")
-    .style("text-anchor", "end")
 
     svg.append("text")             
     .attr("transform",
@@ -126,9 +121,9 @@ let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Number of Total Deaths");       
+    .text("Number of Total Deaths");   
+      
   svg.select("x-axis axis").remove();
   svg.select("y-axis axis").remove();
-  svg.select("text.axis-title").remove();
 }
 }
