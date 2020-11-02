@@ -1,4 +1,4 @@
-export default function genderBarChart(data) {
+export default function genderBarChart(data, country, year) {
     console.log(data)
     const filteredData = data.filter(d=> d.Country === "Afghanistan" && d.Age === "All ages" && d.Sex !== "Both" &&d.Year === 2010);
     console.log(filteredData)

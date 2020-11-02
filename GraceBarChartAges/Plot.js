@@ -1,5 +1,5 @@
 export default
-function Plot(container) {
+function Plot(data, country) {
 	// initialization
     const margin = {top:30, left:50, bottom:65, right:30};
     const width = 700- margin.left - margin.right;

@@ -1,4 +1,4 @@
-function BarChartAges(data, country){
+export default function BarChartAges(data, country){
   console.log(country)
   console.log(data)
   filterData(country);

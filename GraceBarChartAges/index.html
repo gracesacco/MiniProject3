@@ -17,7 +17,7 @@
     
     <script src="https://d3js.org/d3.v6.js" defer></script>
     <script src="https://unpkg.com/topojson@3" defer></script>
-    <script src="mapchart.js" defer></script>
+    <script src="mapchart.js" defer type="module"></script>
     <link rel="stylesheet" href="style.css">
 
     <!-- <script src="main.js" defer></script> -->
@@ -26,22 +26,29 @@
   
   </head>  
   <body>
-      <h2>Map</h2>
-      <div class="yearselector">
-        <select id="year-category" class="form-control">
-          <option value="1970">1970</option>
-          <option value="1980">1980</option>
-          <option value="1990">1990</option>
-          <option value="2000">2000</option>
-          <option value="2010">2010</option>
-        </select>
+      <h2>Mortality Rates by Country</h2>
+      <div class="row">
+        <div class="col2">
+
+        </div>
+        <div class="yearselector">
+          <select id="year-category" class="form-control">
+            <option value="1970">1970</option>
+            <option value="1980">1980</option>
+            <option value="1990">1990</option>
+            <option value="2000">2000</option>
+            <option value="2010">2010</option>
+          </select>
+        </div>
       </div>
+
       <div class = "mapchart">
 
       </div>
+      <div id="chart-area"></div>
       <div class="row">
         <div class="col1">
-
+S
         </div>
         <div class="col1">
 s
