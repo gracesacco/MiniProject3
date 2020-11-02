@@ -1,6 +1,8 @@
 body {
     background-color: #ffffff;
     font-family: 'Roboto', sans-serif;
+    background-color: rgb(243, 250, 243);
+
   }
   
   h1 {
@@ -8,13 +10,23 @@ body {
     font-weight: 100;
     text-align: center;
     font-family: 'Satisfy', cursive;
-    color: #BA55D3;
+    color: rgb(11, 11, 199);
+    background-color: rgb(203, 252, 203);
   }
   
   h2 {
     font-family: 'Satisfy', cursive;
     font-size: 20px;
-    color: #BA55D3;
+    color: rgb(11, 11, 199);
+    text-align: center;
+    
+  }
+  
+  .countryName {
+    font-family: 'Satisfy', cursive;
+    font-size: 32px;
+    margin: 20px;
+    color: rgb(11, 11, 199);
     text-align: center;
   }
   
@@ -36,7 +48,8 @@ body {
   
   .source-desc {
     font-size: 11px;
-    color: #FF00FF;
+    color: rgb(11, 11, 199);
+    /* color: #FF00FF; */
     margin-top: 20px;
   }
   
@@ -150,10 +163,3 @@ body {
   line-height: 20px;
 }
 
-.countryName {
-  font-family: 'Satisfy', cursive;
-  font-size: 32px;
-  margin: 20px;
-  color: #BA55D3;
-  text-align: center;
-}
