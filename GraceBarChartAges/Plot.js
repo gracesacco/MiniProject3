@@ -1,9 +1,9 @@
 export default
 function Plot(container, _data,_country,_year) {
 	// initialization
-    const margin = {top:30, left:75, bottom:80, right:30};
-    const width = 700- margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    const margin = {top: 20, right: 20, bottom: 70, left: 75};
+    const width = 500 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
 
     d3.select('#agec').remove();
 
@@ -84,7 +84,7 @@ function Plot(container, _data,_country,_year) {
         .text("Death rate per 100,000");
 
     svg.append("text")
-        .attr("y", height + margin.bottom-5)
+        .attr("y", height + margin.bottom)
         .attr("x", width/2)
         .attr("font-size",10)
         .style("text-anchor", "middle")
@@ -166,8 +166,8 @@ function Plot(container, _data,_country,_year) {
             .data(yvals)
             .enter()
             .append('circle')
-            .attr('cx', 500 )
-            .attr('cy', function(d,i){ return 100 + i*25} )
+            .attr('cx', width-120 )
+            .attr('cy', function(d,i){ return i*25-2} )
             .attr('r',8)
             .attr('fill', d=> color(d));
 
@@ -175,8 +175,8 @@ function Plot(container, _data,_country,_year) {
             .data(yvals)
             .enter()
             .append('text')
-            .attr("x", 520)
-            .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("x", width-100)
+            .attr("y", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", function(d){ return color(d)})
             .text(function(d){ return d})
             .attr("text-anchor", "left")
