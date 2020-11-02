@@ -1,12 +1,15 @@
 export default
-function Plot(container) {
+function Plot(container, _data,_country,_year) {
 	// initialization
     const margin = {top:30, left:75, bottom:80, right:30};
     const width = 700- margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
+    d3.select('#agec').remove();
+
     const svg = d3.select(container)
     .append("svg")
+    .attr("id", "agec")
     .attr("width", width+margin.left+margin.right)
     .attr("height", height+margin.top+margin.bottom)
     .append("g")
@@ -15,8 +18,8 @@ function Plot(container) {
     const padding = 5;
 
 
-	function update(_data,_country,_year){
-        const data=_data;
+
+        const data=_data[1];
         const country=_country;
         const year=_year;
 
@@ -29,7 +32,7 @@ function Plot(container) {
         console.log("Plot data",ab);
 
         const xScale = d3.scalePoint()
-        .range([padding, width-padding]);    
+        .range([padding, width-padding]);
 
         const yScale = d3.scaleLinear()
         .range([height-padding, padding]);
@@ -180,11 +183,5 @@ function Plot(container) {
             .style("alignment-baseline", "middle");
 
 
-
-
-    }
-    return {
-        update
-        }
 
 }

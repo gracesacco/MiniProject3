@@ -1,14 +1,15 @@
 import BarChartAges from './BarChartAges.js';
 import genderChart from './genderchart.js';
 import countryName from './countryName.js';
+import Plot from './Plot.js';
 
 Promise.all([ // load multiple files
         d3.json('world-110m.json'),d3.csv('IHME_GBD_2010_MORTALITY_AGE_SPECIFIC_BY_COUNTRY_1970_2010-2.csv',d3.autoType)])
-        .then((data) => { // or use destructuring :([airports, wordmap])=>{ ... 
+        .then((data) => { // or use destructuring :([airports, wordmap])=>{ ...
         let map = data[0]
         let countries = data[1];
         const features = topojson.feature(map, map.objects.countries).features;
-        
+
         const mySelect = document.getElementById('year-category');
         mySelect.onchange = function() {
             let year = document.getElementById("year-category").value;
@@ -34,7 +35,7 @@ Promise.all([ // load multiple files
                         features[i].properties.DeathRate = filteredData[j].DeathRate;
                         features[i].properties.Deaths = filteredData[j].Deaths;
                         exist = true;
-                    } 
+                    }
                 }
                 if(!exist) {
                   restOfCountries.push(features[i].properties.name)
@@ -44,11 +45,11 @@ Promise.all([ // load multiple files
 
             const width = 1100;
             const height = 300;
-    
+
             const projection = d3.geoMercator()
                 .fitExtent([[0,0], [width, height]],
                 topojson.feature(map, map.objects.countries));
-            
+
             const path = d3.geoPath()
                 .projection(projection);
             const color = d3.scaleQuantize(d3.extent(features, d=>d.properties.DeathRate), d3.schemeReds[9])
@@ -59,7 +60,7 @@ Promise.all([ // load multiple files
                 return "White"
               } else {
                 return color(data.properties.DeathRate)
-              } 
+              }
             }
             const svg = d3.select('.mapchart').append('svg')
                 .attr('viewBox', [0,0,width,height])
@@ -87,19 +88,19 @@ Promise.all([ // load multiple files
                 })
                 .on("mouseleave", (event, d) => {
                   d3.select("#tooltip").classed("hidden", true);
-      
+
                 })
                 .on("click", (event,d )=> {
                   const countryDIV = document.getElementById("country");
                   if (countryDIV.style.display === "none") {
                     countryDIV.style.display = "block";
-                  } 
+                  }
                   countryName(d.properties.name)
                   BarChartAges(data, d.properties.name)
                   genderChart(data, d.properties.name, year)
-                  // Plot(data, d.properties.name)
+                  Plot("#age-chart",data, d.properties.name, year)
                 });
-    
+
             svg.append('path')
                 .datum(topojson.mesh(map, map.objects.countries))
                 .attr("d", path)
