@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
 
   }
-  
+
   h1 {
     margin-top: 10px;
     font-weight: 100;
@@ -12,13 +12,13 @@ body {
     color: black;
     background-color: rgb(235, 232, 232)
   }
-  
+
   h2 {
     font-family: 'TimesNewRoman', 'Times New Roman';
     font-size: 20px;
     color: black;
     text-align: center;
-    
+
   }
 
   h3 {
@@ -47,7 +47,7 @@ body {
     border-color: black;
     color: black;
   }
-  
+
   .countryName {
     font-family: 'TimesNewRoman', 'Times New Roman';
     font-size: 32px;
@@ -55,15 +55,15 @@ body {
     color: black;
     text-align: center;
   }
-  
+
   .content {
     text-align: center;
   }
-  
+
   .user-control label {
     margin-right: 20px;
   }
-  
+
   .user-control #attraction-category {
     display: inline-block;
     background: transparent;
@@ -71,22 +71,22 @@ body {
     border: 1px solid "#black";
     outline: none;
   }
-  
+
   .source-desc {
     font-size: 11px;
     color: rgb(11, 11, 199);
     /* color: #FF00FF; */
     margin-top: 20px;
   }
-  
+
   /****************/
   /*   BAR-CHART  */
   /****************/
-  
+
   .bar {
     fill: crimson;
   }
-  
+
   .bar:hover {
     fill: darkred;
   }
@@ -97,11 +97,11 @@ body {
   .bar1:hover {
     fill: brown;
   }
-  
+
   .axis {
     font: 10px sans-serif;
   }
-  
+
   .axis path,
   .axis line,
   .domain {
@@ -109,22 +109,22 @@ body {
     stroke: #000;
     shape-rendering: crispEdges;
   }
-  
+
   .x-axis text {
     font-weight: bold;
   }
-  
+
   .axis-title {
       fill: #888;
       font-size: 12px;
   }
-  
+
 
   .yearselector {
     width: 15%;
     margin-left: 1em;
 
-/* 
+/*
     margin-left: 15em;
     margin-right: 70em; */
   }
