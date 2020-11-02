@@ -88,7 +88,8 @@ body {
   }
 
   .col1{
-    width:33%;
+    width:32.5%;
+    margin-left:1.5em;
   }
   .col2 {
     width: 20%
