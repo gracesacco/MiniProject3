@@ -44,7 +44,7 @@ Promise.all([
 
             }
 
-            const width = 1100;
+            const width = 1150;
             const height = 300;
 
             const projection = d3.geoMercator()
