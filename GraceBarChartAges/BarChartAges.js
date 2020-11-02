@@ -1,6 +1,4 @@
 export default function BarChartAges(data, country){
-  console.log(country)
-  console.log(data)
   filterData(country);
 
   function filterData(country) {
@@ -22,7 +20,6 @@ export default function BarChartAges(data, country){
         newResults.push(e);
       };
     })
-    console.log(newResults);
     renderBarChart(newResults);
   }
 function renderBarChart(data) {

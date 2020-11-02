@@ -1,4 +1,5 @@
 import BarChartAges from './BarChartAges.js'
+import genderChart from './genderchart.js';
 
 Promise.all([ // load multiple files
         d3.json('world-110m.json'),d3.csv('IHME_GBD_2010_MORTALITY_AGE_SPECIFIC_BY_COUNTRY_1970_2010-2.csv',d3.autoType)])
@@ -12,6 +13,8 @@ Promise.all([ // load multiple files
             let year = document.getElementById("year-category").value;
             year = parseInt(year);
             d3.select("svg").remove();
+            d3.select('#svgGender').remove();
+
 
             filterData(year);
             }
@@ -19,7 +22,6 @@ Promise.all([ // load multiple files
         const filterData = (year) => {
             let restOfCountries = [];
             let filteredData = countries.filter(d=>d.Age === "All ages" && d.Sex === "Both" && d.Year === year)
-            console.log(filteredData)
 
               for (let i = 0; i<features.length; i++){
                 let exist = false;
@@ -36,8 +38,8 @@ Promise.all([ // load multiple files
 
             }
 
-            const width = 1000;
-            const height = 400;
+            const width = 1100;
+            const height = 300;
     
             const projection = d3.geoMercator()
                 .fitExtent([[0,0], [width, height]],
@@ -51,22 +53,23 @@ Promise.all([ // load multiple files
 
               if(restOfCountries.includes(data.properties.name)){
                 return "White"
-              }
-
-              if(data.properties.name !== "Greeland"){
+              } else {
                 return color(data.properties.DeathRate)
               } 
             }
             const svg = d3.select('.mapchart').append('svg')
-                .attr('viewBox', [0,0,width,height]);
+                .attr('viewBox', [0,0,width,height])
 
             svg.selectAll('path')
                 .data(features)
                 .join('path')
                 .attr('d', path)
                 .attr('fill', d=> hasDeathRate(d))
-                .on("click", (event,d )=> {
+                .on("mouseenter", (event, d) => {
                   const pos = d3.pointer(event, window);
+                  // if (d.properties.name === null){
+                  //   console.log('d')
+                  // }
                   d3.select("#tooltip")
                   .style("left", pos[0] + "px")
                   .style("top", pos[1] + "px")
@@ -77,8 +80,14 @@ Promise.all([ // load multiple files
                     "Death Rate : " + d.properties.DeathRate + " (per 100,000)"
                   )
                   d3.select("#tooltip").classed("hidden", false);
+                })
+                .on("mouseleave", (event, d) => {
+                  d3.select("#tooltip").classed("hidden", true);
+      
+                })
+                .on("click", (event,d )=> {
                   BarChartAges(data, d.properties.name)
-                  // genderBarChart(data, d.properties.name, year)
+                  genderChart(data, d.properties.name, year)
                   // Plot(data, d.properties.name)
                 });
     
