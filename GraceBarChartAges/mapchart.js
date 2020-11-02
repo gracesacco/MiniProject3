@@ -1,5 +1,6 @@
-import BarChartAges from './BarChartAges.js'
+import BarChartAges from './BarChartAges.js';
 import genderChart from './genderchart.js';
+import countryName from './countryName.js';
 
 Promise.all([ // load multiple files
         d3.json('world-110m.json'),d3.csv('IHME_GBD_2010_MORTALITY_AGE_SPECIFIC_BY_COUNTRY_1970_2010-2.csv',d3.autoType)])
@@ -14,6 +15,7 @@ Promise.all([ // load multiple files
             year = parseInt(year);
             d3.select("svg").remove();
             d3.select('#svgGender').remove();
+            d3.select('#chartAges').remove();
 
 
             filterData(year);
@@ -86,6 +88,7 @@ Promise.all([ // load multiple files
       
                 })
                 .on("click", (event,d )=> {
+                  countryName(d.properties.name)
                   BarChartAges(data, d.properties.name)
                   genderChart(data, d.properties.name, year)
                   // Plot(data, d.properties.name)

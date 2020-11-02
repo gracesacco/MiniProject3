@@ -2,12 +2,12 @@ export default function genderBarChart(countrydata, country, year) {
     const data = countrydata[1]
     const filteredData = data.filter(d=> d.Country === country && d.Age === "All ages" && d.Sex !== "Both" &&d.Year === year);
     
-    const margin = { top: 50, right: 30, bottom: 30, left: 50 };
-    const width = 400 - margin.left - margin.right;
+    const margin = {top: 20, right: 20, bottom: 70, left: 75};
+    const width = 500 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
     
     const sexData = [...new Set(data.map(d=>d.Sex))].slice(0,2);
-    const xScale = d3.scaleBand().domain(sexData).range([0, width]);
+    const xScale = d3.scaleBand().domain(sexData).range([0, width]).padding(0.1);
     const yScale = d3.scaleLinear().domain([0, parseFloat(d3.max(filteredData, d=>d.DeathRate))]).range([height, 0]);
 
     d3.select('#svgGender').remove();
@@ -24,6 +24,7 @@ export default function genderBarChart(countrydata, country, year) {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
 
+        //append axes
 
         svg.append("g")
         .attr("class", "x-axis")
@@ -35,20 +36,20 @@ export default function genderBarChart(countrydata, country, year) {
         .call(yAxis)
         .attr("transform", `translate(${margin.left} , ${margin.top})`);
     
+        //append text labels
         svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 50)
-        .attr("x", -30)
+        .attr("x", -120)
+        .attr("y", 20)
         .attr("dy", "1em")
-        .style("text-anchor", "end")
-        .text("Death Rate");       
-    
-        svg.append("text")
-        .attr("y", height+margin.top)
-        .attr("x", width+margin.left+margin.right)
-        .attr("dy", "1em")
-        .style("text-anchor", "end")
-        .text("Gender"); 
+        .style("text-anchor", "middle")
+        .text("Death Rate per 100,000");  
+
+        svg.append("text")             
+        .attr("transform",
+              "translate(" + (width/2 + 60) + " ," + (height + margin.top + 40) + ")")
+        .style("text-anchor", "middle")
+        .text("Gender");
         
         svg.selectAll('rect')
         .data(filteredData)
@@ -77,24 +78,12 @@ export default function genderBarChart(countrydata, country, year) {
 
     bars.exit().remove();
 
-// svg.select('.x-axis')
-//     .transition()
-//     .duration(1000) 
-//     .call(xAxis)
-    
-svg.select('.y-axis')
-    .transition()
-    .duration(1000) 
-    .call(yAxis)
+
+    svg.select('.y-axis')
+        .transition()
+        .duration(1000) 
+        .call(yAxis)
 
     window.scrollTo(0, 500); 
 
-    //     update(filteredData)
-
-    // function update(data){
-
-
-
-
-    // }
 }
