@@ -16,8 +16,8 @@ Promise.all([ // load multiple files
             d3.select("svg").remove();
             d3.select('#svgGender').remove();
             d3.select('#chartAges').remove();
-
-
+            const countryDIV = document.getElementById("country");
+            countryDIV.remove();
             filterData(year);
             }
 
