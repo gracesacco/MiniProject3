@@ -67,7 +67,7 @@ export default function genderBarChart(countrydata, country, year) {
         .merge(bars)
         .transition()
         .duration(1000) 
-        .attr('x', d => xScale(d.Sex)+margin.left+55)
+        .attr('x', d => xScale(d.Sex)+margin.left+60)
         .attr('y', d => yScale(d.DeathRate)+margin.top)
         .attr('width', 50)
         .attr('height', d=> height - yScale(d.DeathRate))
