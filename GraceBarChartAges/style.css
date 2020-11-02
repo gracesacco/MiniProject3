@@ -23,9 +23,9 @@ body {
 
   h3 {
     font-family: 'TimesNewRoman', 'Times New Roman';
-    font-size: 35px;
+    font-size: 20px;
     color: black;
-    margin-left: 5px;
+    text-align: center;
   }
 
   .button {
