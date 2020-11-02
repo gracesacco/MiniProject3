@@ -4,7 +4,7 @@ body {
     background-color: rgb(243, 250, 243);
 
   }
-  
+
   h1 {
     margin-top: 10px;
     font-weight: 100;
@@ -13,13 +13,13 @@ body {
     color: rgb(11, 11, 199);
     background-color: rgb(203, 252, 203);
   }
-  
+
   h2 {
     font-family: 'Satisfy', cursive;
     font-size: 20px;
     color: rgb(11, 11, 199);
     text-align: center;
-    
+
   }
 
   h3 {
@@ -31,8 +31,8 @@ body {
 
   .button {
     font-family: 'Satisfy', cursive;
-    margin: 0 auto; 
-    width: 10%; 
+    margin: 0 auto;
+    width: 10%;
     background-color: rgb(203, 252, 203);
     border-color: rgb(11, 11, 199);
     color: rgb(11, 11, 199);
@@ -47,7 +47,7 @@ body {
     border-color: rgb(203, 252, 203);
     color: rgb(203, 252, 203);
   }
-  
+
   .countryName {
     font-family: 'Satisfy', cursive;
     font-size: 32px;
@@ -55,15 +55,15 @@ body {
     color: rgb(11, 11, 199);
     text-align: center;
   }
-  
+
   .content {
     text-align: center;
   }
-  
+
   .user-control label {
     margin-right: 20px;
   }
-  
+
   .user-control #attraction-category {
     display: inline-block;
     background: transparent;
@@ -71,30 +71,30 @@ body {
     border: 1px solid "#black";
     outline: none;
   }
-  
+
   .source-desc {
     font-size: 11px;
     color: rgb(11, 11, 199);
     /* color: #FF00FF; */
     margin-top: 20px;
   }
-  
+
   /****************/
   /*   BAR-CHART  */
   /****************/
-  
+
   .bar {
     fill: #000;
   }
-  
+
   .bar:hover {
     fill: #888;
   }
-  
+
   .axis {
     font: 10px sans-serif;
   }
-  
+
   .axis path,
   .axis line,
   .domain {
@@ -102,22 +102,22 @@ body {
     stroke: #000;
     shape-rendering: crispEdges;
   }
-  
+
   .x-axis text {
     font-weight: bold;
   }
-  
+
   .axis-title {
       fill: #888;
       font-size: 12px;
   }
-  
+
 
   .yearselector {
     width: 15%;
     margin-left: 1em;
 
-/* 
+/*
     margin-left: 15em;
     margin-right: 70em; */
   }
@@ -189,3 +189,27 @@ body {
   line-height: 20px;
 }
 
+
+#agetooltip {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+#agetooltip.hidden {
+    display: none;
+}
+#agetooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 10px;
+    line-height: 15px;
+}
