@@ -1,37 +1,31 @@
-function BarChartAges(data){
-console.log(data)
+function BarChartAges(data, country){
+  console.log(country)
+  console.log(data)
+  filterData(country);
 
   function filterData(country) {
     let newResults = [];
     let finalResults = data.filter(function(e){
-     if (e.CountryCode == country && e.Year == 1970 && e.Age == "All ages" && e.Sex == "Both") {
+     if (e.Country == country && e.Year == 1970 && e.Age == "All ages" && e.Sex == "Both") {
         newResults.push(e);
       };
-    if (e.CountryCode == country && e.Year == 1980 && e.Age == "All ages" && e.Sex == "Both") {
+    if (e.Country == country && e.Year == 1980 && e.Age == "All ages" && e.Sex == "Both") {
         newResults.push(e);
       };
-    if (e.CountryCode == country && e.Year == 1990 && e.Age == "All ages" && e.Sex == "Both") {
+    if (e.Country == country && e.Year == 1990 && e.Age == "All ages" && e.Sex == "Both") {
         newResults.push(e);
       };
-    if (e.CountryCode == country && e.Year == 2000 && e.Age == "All ages" && e.Sex == "Both") {
+    if (e.Country == country && e.Year == 2000 && e.Age == "All ages" && e.Sex == "Both") {
         newResults.push(e);
       };
-    if (e.CountryCode == country && e.Year == 2010 && e.Age == "All ages" && e.Sex == "Both") {
+    if (e.Country == country && e.Year == 2010 && e.Age == "All ages" && e.Sex == "Both") {
         newResults.push(e);
       };
     })
     console.log(newResults);
     renderBarChart(newResults);
   }
-  
-  
-  var mySelect = document.getElementById('country-category');
-  mySelect.onchange = function() {
-     var x = document.getElementById("country-category").value;
-     console.log(x);
-     filterData(x); 
-    }
-
+function renderBarChart(data) {
 let margin = {top: 20, right: 20, bottom: 70, left: 70},
   width = 600 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
@@ -63,7 +57,6 @@ let xAxisGroup = svg.append("g").attr("class", "x-axis axis");
 
 let yAxisGroup = svg.append("g").attr("class", "y-axis axis");
 
-function renderBarChart(data) {
   data.Deaths= +data.Deaths;
   x.domain( data.map(function(d) { return d.Year; }))
   y.domain([ 0, d3.max(data, function(d) { return d.Deaths;  })]);
